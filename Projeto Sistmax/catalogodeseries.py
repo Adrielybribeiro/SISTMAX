@@ -1,20 +1,21 @@
 import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
+from colorama import Fore, Style
 
 # Função de conexão com o banco de dados
 def conectar():
     try:
         conexao = mysql.connector.connect(
             host="localhost",
-            port="3306",
+            port="3307",
             user="root",
-            password="12345678",
+            password="",
             database="Sistmax"
         )
         return conexao
     except Error as e:
-        print(f"Erro ao conectar ao banco de dados: {e}")
+        print(Fore.RED + f"Erro ao conectar ao banco de dados: {e}" + Style.RESET.ALL)
         return None
 
 # Função para adicionar uma nova série
@@ -42,7 +43,7 @@ def adicionar_serie():
             cursor.close()
             conexao.close()
     except mysql.connector.Error as erro:
-        print(f"Erro ao adicionar série: {erro}")
+        print(Fore.RED + f"Erro ao adicionar série: {erro}"+ Style.RESET.ALL)
 
 # Função para listar todas as séries
 def listar_series():
@@ -59,12 +60,12 @@ def listar_series():
                 for serie in series:
                     print(f"{serie[0]:<5} {serie[1]:<30} {serie[4]:<5} {serie[3]:<15} {serie[6]:<10}")
             else:
-                print("Nenhuma série encontrada.")
+                print(Fore.RED + "Nenhuma série encontrada." + Style.RESET.ALL)
             
             cursor.close()
             conexao.close()
     except mysql.connector.Error as erro:
-        print(f"Erro ao listar séries: {erro}")
+        print(Fore.RED + f"Erro ao listar séries: {erro}" + Style.RESET.ALL)
 
 # Função para adicionar um episódio a uma série
 def adicionar_episodio():
@@ -90,7 +91,7 @@ def adicionar_episodio():
             cursor.close()
             conexao.close()
     except mysql.connector.Error as erro:
-        print(f"Erro ao adicionar episódio: {erro}")
+        print(Fore.RED + f"Erro ao adicionar episódio: {erro}" + Style.RESET.ALL)
 
 # Função para avaliar uma série
 def avaliar_serie():
@@ -114,7 +115,7 @@ def avaliar_serie():
             cursor.close()
             conexao.close()
     except mysql.connector.Error as erro:
-        print(f"Erro ao avaliar série: {erro}")
+        print(Fore.RED + f"Erro ao avaliar série: {erro}" + Style.RESET.ALL)
 
 # Função para adicionar uma série aos favoritos
 def adicionar_favorito():
@@ -136,4 +137,4 @@ def adicionar_favorito():
             cursor.close()
             conexao.close()
     except mysql.connector.Error as erro:
-        print(f"Erro ao adicionar aos favoritos: {erro}")
+        print(Fore.RED + f"Erro ao adicionar aos favoritos: {erro}" + Style.RESET.ALL)

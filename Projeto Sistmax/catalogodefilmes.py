@@ -1,19 +1,20 @@
 import mysql.connector
 from mysql.connector import Error
+from colorama import Fore, Style
 
 # Função para conectar ao banco de dados
 def conectar():
     try:
         conexao = mysql.connector.connect(
             host="localhost",
-            port="3306",
+            port="3307",
             user="root",
-            password="12345678",
+            password="",
             database="Sistmax"
         )
         return conexao
     except Error as e:
-        print(f"Erro ao conectar ao banco de dados: {e}")
+        print(Fore.RED +  f"Erro ao conectar ao banco de dados: {e}" + Style.RESET.ALL)
         return None
 
 # Função para adicionar filme
@@ -29,7 +30,7 @@ def adicionar_filme(titulo, ano, genero, diretor, duracao):
             cursor.close()
             conexao.close()
     except mysql.connector.Error as erro:
-        print(f"Erro ao adicionar filme: {erro}")
+        print(Fore.RED + f"Erro ao adicionar filme: {erro}" + Style.RESET_ALL)
 
 # Função para listar filmes
 def listar_filmes():
@@ -45,11 +46,11 @@ def listar_filmes():
                 for filme in filmes:
                     print(f"{filme[0]:<5} {filme[1]:<20} {filme[2]:<10} {filme[3]:<15} {filme[4]:<20} {filme[5]:<10}")
             else:
-                print("Nenhum filme no catálogo.")
+                print(Fore.RED + "Nenhum filme no catálogo." + Style.RESET_ALL)
             cursor.close()
             conexao.close()
     except mysql.connector.Error as erro:
-        print(f"Erro ao listar filmes: {erro}")
+        print(Fore.RED +  f"Erro ao listar filmes: {erro}" + Style.RESET_ALL)
 
 # Função para buscar filme
 def buscar_filme(titulo):
@@ -66,11 +67,11 @@ def buscar_filme(titulo):
                 for filme in filmes:
                     print(f"{filme[0]:<5} {filme[1]:<20} {filme[2]:<10} {filme[3]:<15} {filme[4]:<20} {filme[5]:<10}")
             else:
-                print(f"Nenhum filme encontrado com o título '{titulo}'.")
+                print(Fore.RED + f"Nenhum filme encontrado com o título '{titulo}'." )
             cursor.close()
             conexao.close()
     except mysql.connector.Error as erro:
-        print(f"Erro ao buscar filme: {erro}")
+        print(Fore.RED + f"Erro ao buscar filme: {erro}" + Style.RESET_ALL)
 
 # Função principal de menu
 def menu():
@@ -99,7 +100,7 @@ def menu():
             print("Saindo...")
             break
         else:
-            print("Opção inválida. Tente novamente.")
+            print(Fore.RED + "Opção inválida. Tente novamente." + Style.RESET_ALL)
 
 # Iniciar o menu
 menu()
